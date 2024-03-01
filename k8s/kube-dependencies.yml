@@ -1,5 +1,4 @@
 - hosts: all
-  become: yes
   tasks:
     - fail:
        msg: "OS should be Ubuntu 23.04, not {{ ansible_distribution }} {{ ansible_distribution_version }}"
@@ -145,7 +144,6 @@
       reboot:
 
 - hosts: master
-  become: yes
   tasks:
     - name: install Kubectl
       apt:
