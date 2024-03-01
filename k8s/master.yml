@@ -1,5 +1,4 @@
 - hosts: master
-  become: yes
   tasks:
     - name: create an empty file for Kubeadm configuring
       copy:
@@ -36,8 +35,6 @@
         creates: cluster_initialized.log
 
     - name: create .kube directory
-      become: yes
-      become_user: sysadmin
       file:
         path: $HOME/.kube
         state: directory
@@ -51,8 +48,6 @@
         owner: sysadmin
 
     - name: install Pod network
-      become: yes
-      become_user: sysadmin
       shell: kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml >> pod_network_setup.log
       args:
         chdir: $HOME
